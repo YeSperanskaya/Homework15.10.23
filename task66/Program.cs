@@ -4,55 +4,47 @@
 // M = 4; N = 8. -> 30
 
 
-
-
-int result = SumNumbers()
-
-
-int SumNumbers (int numM, int numN)
+// проверка максимального и минимального значений введеных цифр.
+int[] ExaminationMinMax(int numM, int numN)
 {
-    int sum = 0;
-    if(numM == numN) return numM+sum;
-    sum = sum + SumNumbers(numM + 1, numN);
-    return sum;
-}   
+    if (numM == numN) 
+    {
+        int[] arr = new int[] {numM, numM, numM};
+        return arr;
+    }
+    else if (numM > numN)
+    {
+        int[] arr = new int[] {numN, numM};
+        return arr;
+    }
+    else
+    {
+        int[] arr = new int[] {numM, numN};
+        return arr; 
+    }
+}
 
+// поиск суммы
+int SumNumbers (int min, int max)
+{
+    if (min > max) return 0;
+    else return min += SumNumbers(min + 1, max);
+}
 
-
-// int ExaminationMinMax (int numM, int numN)
-// {
-//     int sum = 0;
-//     sum = sum + 
-//     if 
-//     if (numM == numN) return numM;
-//     else if(numM > numN)
-//     {
-
-//     }
-// }
-// int SumNumbers (int numM, int numN)
-// {
-//     int sum = 0;
-//     if (numM == numN) return numM;
-//     else if (numM > numN) 
-//     {
-//         if (numM == numN) return 0;
-//         sum = sum + SumNumbers(numM - 1);
-//         return sum;
-//     }
-//     else
-//     {
-//         if (numM == numN) return 0;
-//         sum = sum + SumNumbers(numN - 1);
-//         return sum;
-//     }
-
-// }   
 Console.WriteLine("Введите натуральное число");
 int numberM = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Введите натуральное число");
 int numberN = Convert.ToInt32(Console.ReadLine());
-int sumNumbers = SumNumbers(numberM, numberN);
-Console.Write($"M = {numberM}; N = {numberN} -> {sumNumbers}");
+int[] examinationMinMax = ExaminationMinMax(numberM, numberN);
+if (examinationMinMax.Length > 2)
+{
+    Console.WriteLine($"M = {numberM}; N = {numberN} -> {examinationMinMax[2]}");
+}
+else 
+{
+    int result = SumNumbers(examinationMinMax[0], examinationMinMax[1]);
+    Console.WriteLine($"M = {numberM}; N = {numberN} -> {result}");
+}
+
 
 
